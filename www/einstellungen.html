@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Einstellungen</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function SetStandardValue(){
+                localStorage.Klasse = document.getElementById("standardklasse").value;
+            }
+            
+            function AktualisiereKlassen(){
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                    if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                        document.getElementsByName('klassen').innerHTML = xmlhttp.responseText;
+                    }
+                };
+                xmlhttp.open("POST","http://webapp.gbs-labor.de/Klassen.php",true);
+                xmlhttp.send();
+            }
+            
+        </script>
+        <style>
+        #aktualisieren {
+            display:table-cell;
+            text-align:center;
+            vertical-align:middle;
+            width:100%;
+            height:30px;
+            margin-left:0;
+            margin-right:0;
+            margin-top: 0;
+            margin-bottom:0;
+            background: white;
+            font-family: "Open Sans", sans-serif;
+            font-size: 16px;
+            color:rgb(131, 172, 255);
+            border-radius:4px;
+            border: 1px solid rgb(131, 172, 255);
+            padding:auto;
+            
+        }
+        #aktualisieren:active {
+            background: rgb(131, 172, 255);
+            color:white;
+        }
+        #aktualisieren:focus {
+            outline:none;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="box" style="margin-top:10px;margin-bottom:56px;border-bottom:3px solid rgb(153, 153, 153);">
+            <h3 style="text-align: center;">Vertretungsplan Einstellungen</h3>
+            <br>
+            <div class="box" style="border:1px solid rgb(131, 172, 255);">
+        <select name="klassen" id="standardklasse" onchange="SetStandardValue()" style="margin-top:6px;margin-bottom:6px;">
+                    <option value="">Klassenübersicht</option>
+                    <option value="alleklassen">Alle Klassen</option>
+                    <option value='BBS2-1'>BBS2-1</option>
+                    <option value='BBS3-1'>BBS3-1</option>
+                    <option value='BBZ3-1'>BBZ3-1</option>
+                    <option value='BBZ3-2'>BBZ3-2</option>
+                    <option value='BEKB-1'>BEKB-1</option>
+                    <option value='BEKF-1'>BEKF-1</option>
+                    <option value='BEKH-1'>BEKH-1</option>
+                    <option value='BEKM-1'>BEKM-1</option>
+                    <option value='BFB1-1'>BFB1-1</option>
+                    <option value='BFB1-2'>BFB1-2</option>
+                    <option value='BFC1-1'>BFC1-1</option>
+                    <option value='BFE1-1'>BFE1-1</option>
+                    <option value='BFE1-2'>BFE1-2</option>
+                    <option value='BFEM-1'>BFEM-1</option>
+                    <option value='BFF1-1'>BFF1-1</option>
+                    <option value='BFG1-1'>BFG1-1</option>
+                    <option value='BFH1-1'>BFH1-1</option>
+                    <option value='BFH1-2'>BFH1-2</option>
+                    <option value='BFMF-1'>BFMF-1</option>
+                    <option value='BFMF-2'>BFMF-2</option>
+                    <option value='BFMM-3'>BFMM-3</option>
+                    <option value='BFMM-4'>BFMM-4</option>
+                    <option value='BFMV-5'>BFMV-5</option>
+                    <option value='BFR1-1'>BFR1-1</option>
+                    <option value='BFR1-2'>BFR1-2</option>
+                    <option value='BFR1-3'>BFR1-3</option>
+                    <option value='BGT1-1'>BGT1-1</option>
+                    <option value='BGT1-2'>BGT1-2</option>
+                    <option value='BGT2-1'>BGT2-1</option>
+                    <option value='BGT3-1'>BGT3-1</option>
+                    <option value='BMA2-1'>BMA2-1</option>
+                    <option value='BMA3-1'>BMA3-1</option>
+                    <option value='BVE1-1'>BVE1-1</option>
+                    <option value='BVHB-1'>BVHB-1</option>
+                    <option value='BVJA-1'>BVJA-1</option>
+                    <option value='BVMB-1'>BVMB-1</option>
+                    <option value='BXO1-1'>BXO1-1</option>
+                    <option value='BXO2-1'>BXO2-1</option>
+                    <option value='BXT1-1'>BXT1-1</option>
+                    <option value='BXT2-1'>BXT2-1</option>
+                    <option value='EBT2-1'>EBT2-1</option>
+                    <option value='EBT3-1'>EBT3-1</option>
+                    <option value='EBT3-2'>EBT3-2</option>
+                    <option value='EBT4-1'>EBT4-1</option>
+                    <option value='EBT4-2'>EBT4-2</option>
+                    <option value='EEG2-1'>EEG2-1</option>
+                    <option value='EEG3-1'>EEG3-1</option>
+                    <option value='EEG4-1'>EEG4-1</option>
+                    <option value='EGS1-1'>EGS1-1</option>
+                    <option value='EMA1-1'>EMA1-1</option>
+                    <option value='EMA2-1'>EMA2-1</option>
+                    <option value='EMA3-1'>EMA3-1</option>
+                    <option value='EMA4-1'>EMA4-1</option>
+                    <option value='FML1-1'>FML1-1</option>
+                    <option value='FML2-1'>FML2-1</option>
+                    <option value='FML3-1'>FML3-1</option>
+                    <option value='FOG1-1'>FOG1-1</option>
+                    <option value='FOG2-1'>FOG2-1</option>
+                    <option value='FOT2-1'>FOT2-1</option>
+                    <option value='HTI1-1'>HTI1-1</option>
+                    <option value='HTI2-1'>HTI2-1</option>
+                    <option value='HTI3-1'>HTI3-1</option>
+                    <option value='HTI3-2'>HTI3-2</option>
+                    <option value='KFR1-1'>KFR1-1</option>
+                    <option value='KFR2-1'>KFR2-1</option>
+                    <option value='KFR3-1'>KFR3-1</option>
+                    <option value='MAS1-1'>MAS1-1</option>
+                    <option value='MAS2-1'>MAS2-1</option>
+                    <option value='MAS3-1'>MAS3-1</option>
+                    <option value='MAS4-1'>MAS4-1</option>
+                    <option value='MIN1-1'>MIN1-1</option>
+                    <option value='MIN2-1'>MIN2-1</option>
+                    <option value='MIN2-2'>MIN2-2</option>
+                    <option value='MIN3-1'>MIN3-1</option>
+                    <option value='MIN3-2'>MIN3-2</option>
+                    <option value='MIN4-1'>MIN4-1</option>
+                    <option value='MMT1-1'>MMT1-1</option>
+                    <option value='MMT2-1'>MMT2-1</option>
+                    <option value='MMT3-1'>MMT3-1</option>
+                    <option value='MMT4-1'>MMT4-1</option>
+                    <option value='MVK1-1'>MVK1-1</option>
+                    <option value='MVK2-1'>MVK2-1</option>
+                    <option value='MVK3-1'>MVK3-1</option>
+                    <option value='MZE1-1'>MZE1-1</option>
+                    <option value='MZE2-1'>MZE2-1</option>
+                    <option value='MZE3-1'>MZE3-1</option>
+                    <option value='MZE4-1'>MZE4-1</option>
+                    <option value='NFB1-1'>NFB1-1</option>
+                    <option value='NFB2-1'>NFB2-1</option>
+                    <option value='NFB3-1'>NFB3-1</option>
+                    <option value='NFI1-1'>NFI1-1</option>
+                    <option value='NFI2-1'>NFI2-1</option>
+                    <option value='NFI3-1'>NFI3-1</option>
+                    <option value='NHO1-1'>NHO1-1</option>
+                    <option value='NHO2-1'>NHO2-1</option>
+                    <option value='NHO2-2'>NHO2-2</option>
+                    <option value='NHO3-1'>NHO3-1</option>
+                    <option value='NKO1-1'>NKO1-1</option>
+                    <option value='NKO2-1'>NKO2-1</option>
+                    <option value='NKO3-1'>NKO3-1</option>
+                    <option value='RGS1-1'>RGS1-1</option>
+                    <option value='RLB2-1'>RLB2-1</option>
+                    <option value='RLB3-1'>RLB3-1</option>
+                    <option value='RLB4-1'>RLB4-1</option>
+                    <option value='RMP2-1'>RMP2-1</option>
+                    <option value='RMP2-2'>RMP2-2</option>
+                    <option value='RMP3-1'>RMP3-1</option>
+                    <option value='RMP3-2'>RMP3-2</option>
+                    <option value='RMP4-1'>RMP4-1</option>
+                    <option value='RMP4-2'>RMP4-2</option>
+                    <option value='VWB1-1'>VWB1-1</option>
+                    <option value='VWB1-2'>VWB1-2</option>
+                    <option value='VWB1-3'>VWB1-3</option>
+                    <option value='VWB1-4'>VWB1-4</option>
+                    <option value='XTO1-1'>XTO1-1</option>
+                    <option value='XTO2-1'>XTO2-1</option>
+                    <option value='XTO3-1'>XTO3-1</option>
+				
+        </select>
+            <p style="font-size: 12px;">
+                *Die Klasse die Sie an dieser Stelle auswählen, wird als Standardklasse ausgewählt und bei jedem Seitenaufruf automatisch geladen.
+            </p>
+            </div>
+            
+        </div>
+        
+    </body>
+
+</html>

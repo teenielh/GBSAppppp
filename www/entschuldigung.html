@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entschuldigung</title>
+    <!-- <link rel="stylesheet" href="./css/bootstrap.css" type="text/css">
+    <script type="text/javascript" src="./js/libs/jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="./js/libs/bootstrap.js"></script> -->
+    
+    <style>
+        form {
+            width: 95%;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        label {
+            width:95%;
+            padding:0;
+            padding-bottom:10px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom: 20px;
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            color:rgb(128, 128, 128);
+            
+        }
+        input[type="text"] {
+            display: block;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            width: 95%;
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            -webkit-appearance: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+             box-shadow: none;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            -ms-border-radius: 0px;
+            -o-border-radius: 0px;
+            border-radius: 0px;
+        }
+        .underlined input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-right: solid 2px /*#c9c9c9;*/rgba(255,255,255,0);
+            border-bottom: solid 2px /*#c9c9c9;*/rgba(255,255,255,0);
+            -webkit-transition: border 0.3s;
+            -moz-transition: border 0.3s;
+            -o-transition: border 0.3s;
+            transition: border 0.3s;
+            }
+        .style input[type="text"]:focus, .style input[type="text"].focus {
+            border-right: solid 2px #969696;
+            border-bottom: solid 2px #969696;
+        }
+        input[type="text"]:focus {
+            outline: none;
+        }
+        form ul li {
+            border-bottom:none;
+            border-top:none;
+        }
+        #absenden {
+            
+            text-align:center;
+            vertical-align:middle;
+            width:100%;
+            height:46px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top: 0px;
+            margin-bottom:0px;
+            background: black;
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            color:white;
+            border-radius:5px;
+            /*border-top:none;
+            border-right:none;
+            border-left:none;
+            border-bottom: 4px solid black;*/
+			border:1px solid black;
+            padding:auto;
+        }
+        
+        #absenden:focus {
+            outline:none;
+        }
+
+        .Status{
+            margin-left:auto;
+            margin-right: auto;
+            margin-bottom:0px;
+            border-top-left-radius:4px;
+            border-top-right-radius:4px;
+            background:rgb(255, 255, 255);
+            border: 1px solid rgb(153, 153, 153);
+            display:block;
+            padding: 6px;
+            padding: 10px;
+            font-size:17px;
+            text-align:center;
+        }
+        
+        .maildiv{
+            margin-top:10px;
+            margin-bottom:55px;
+            display:block;
+            font-family:"Open Sans",sans-serif;
+            font-size: 17px;border-radius:5px;
+            border-bottom:3px solid rgb(153,153,153);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        .maildiv > p{
+            margin-top:10px;
+            margin-bottom:10px;
+            text-align:center;
+            background:rgb(219, 112, 77);
+            //background:rgb(204, 51, 0);
+            color:white;
+            border-radius:5px;
+            padding-bottom:8px;
+            padding-top:8px;
+            border-bottom:3px solid rgb(90, 90, 90);
+        }
+            
+    </style>
+
+    <script>
+    function SendMail(){
+		
+			var vorname = document.MailFormular.vorname.value;
+            var nachname = document.MailFormular.nachname.value;
+            var senderadresse = document.MailFormular.mail.value;
+            var klasse = document.forms.MailFormular.klasse.value;
+            var lehrer = document.forms.MailFormular.lehrer.value;
+            var anfangsdatum = document.MailFormular.start.value;
+            var enddatum = document.MailFormular.bis.value;
+            var grund = document.MailFormular.grund.value;
+			//var geschlecht = $('input[name=geschlecht]:checked', '#MailFormular').val();
+            var geschlecht = localStorage.Geschlecht;
+		
+		if(vorname === '' || nachname === '' || senderadresse === '' || klasse === '' || lehrer === '' || anfangsdatum === '' || grund === ''){
+			alert("Bitte füllen Sie zunächst alle Felder aus");
+            return;
+		}
+		else{
+				document.getElementById('absenden').style.borderTopLeftRadius = "0px";
+				document.getElementById('absenden').style.borderTopRightRadius = "0px";
+				$('#MailResponse').fadeIn(1);
+				$("#MailResponse").addClass("Status");
+				document.getElementById('MailResponse').innerHTML = "Status:  Ausstehend...";
+				
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+							if(xmlhttp.readyState === 4 && xmlhttp.status === 200)
+							{
+								document.getElementById('MailResponse').innerHTML = "";
+								document.getElementById('MailResponse').innerHTML = xmlhttp.responseText;
+							}
+                        };
+                xmlhttp.open("GET", 'http://webapp.gbs-labor.de/mail.php?vorname='+ vorname + '&nachname='+ nachname + '&senderadresse=' +
+                            senderadresse + '&klasse='+ klasse + '&lehrer=' + lehrer + '&anfangsdatum=' + anfangsdatum + 
+                            '&enddatum=' + enddatum + '&grund=' + grund + '&geschlecht=' + geschlecht, true);
+                xmlhttp.send();
+		}
+        }
+		//Delay Funktion
+	function AusblendeDelay(milliseconds) {
+            var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds){
+                        break;
+                    }
+                }
+            }
+            
+        function RadioButtonValue(geschlecht){
+            localStorage.Geschlecht = geschlecht;   
+        }
+    </script>
+
+</head>
+<body>
+    <div class='box maildiv'>
+        <p>
+            Füllen Sie das nachfolgende Formular bitte wahrheitsgemäß und wie angegeben aus
+        </p>
+    <form name="MailFormular" id="MailFormular" style='margin-left:auto;margin-right:auto;margin-bottom:8px;padding-bottom:8px;border-radius: 5px;'>
+        <ul class="underlined style">
+	<li style="margin-bottom:10px;">
+	<label>Ihre Anrede:</label><br><br>
+	<input style="margin-top:-30px;margin-bottom:8px;" type="radio" id="0" name="geschlecht" value="Herr" onclick="RadioButtonValue(this.value)"/>&nbsp;Herr<br>
+	<input type="radio" id="1" name="geschlecht" value="Frau" onclick="RadioButtonValue(this.value)"/>&nbsp;Frau<br>
+	</li>
+            <li>
+                <label for="vorname">Vor-/Nachname und Klasse:</label>
+                <input type="text" placeholder=" Vorname" id="vorname" name="vorname">
+            </li>
+            <li>
+                <input type="text" placeholder=" Nachname" id="nachname" name="nachname">
+                <input type="text" placeholder=" Ihre Klasse" id="klasse" name="klasse">
+            </li>
+            <li>
+                <label for="lehrer">Ihr Klassenlehrer:</label>
+                <input type="text" placeholder=" Herr/Frau Klassenlehrer/in" id="lehrer" name="lehrer">
+            </li>
+            <li>
+                <label for="start">Vom:</label>
+                <input type="text" placeholder=" Anfangsdatum" id="start" name="start">
+            </li>
+            <li>
+                <label for="bis">Bis:</label>
+                <input type="text" placeholder=" Enddatum (optional)" id="bis" name="bis">
+            </li>
+            <li>
+                <label for="grund">Grund für die Abwesenheit:</label>
+                <input type="text" placeholder=" z.B.: Erkrankung" id="grund" name="grund">
+            </li>
+            <li>
+                <label for="mail">Ihre E-Mail Adresse:</label>
+                <input type="text" placeholder=" z.B.: max-mustermann@web.de" id="mail" name="mail">
+            </li>
+              
+        </ul>
+          
+    </form>
+	
+	<div id="MailResponse"></div> 
+        <button id="absenden" onclick="SendMail()">Versenden</button>  
+    </div>
+    
+</body>
+</html>
